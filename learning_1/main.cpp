@@ -129,3 +129,172 @@ int main()
 	return 0;
 }
 */
+
+/*
+// 任务五，数组 ,建立班级成绩分布表10个人，0-60,60-80,80-90,90-100
+
+#include "conio.h"
+void login();
+void loading();
+void manager();
+int main() 
+{
+   char use ;
+	do 
+	{
+		login();
+		loading();
+		system("cls");
+		
+		puts(" *******************欢迎进入管理系统*********************");
+		printf_s("开始使用请按i，返回登录界面请按q");//这里就简单意思一下，要是和实际的系统一样怕是有些难（需要使用多线程）
+		use = _getch();
+		if (use == 'q')
+		{
+			system("cls");
+		}
+	} while (use=='q');
+	putchar('\n');
+	manager();
+	system("pause");
+	return 0;
+}
+
+void login()
+{
+	//int test[5];
+	// test[5] = { 0,0,0,1,2 };这样复制的方法是错误的 ,并且数组之间不可直接复制
+	char hide;
+	char str1[1000];
+	char str2[5] = "yuan";
+	int a[5];
+	int jude = 0;
+	char passwd;
+	char pass[100];
+	char pass1[100] = "3802380";
+	int i = 0;
+	printf_s("                            请输入用户名和登录密码\n");
+	do
+	{
+		printf_s("请输入用户名：");
+		scanf_s("%s", str1, 40);
+		printf_s("请输入密码(按1不显示，按2显示)：");
+		hide = _getch();//不显示的复制		
+		if (hide == '1')
+		{
+			for (i = 0; i < 20; i++)
+			{
+				pass[i] = _getch(); //注意一下，vs里面使用的是_getch(),
+				if (pass[i] == '\r') break;
+				putchar('*');
+			}
+		}
+		else
+		{
+			for (i = 0; i < 20; i++)
+			{
+				pass[i] = _getche(); //注意一下，vs里面使用的是_getch(),
+				if (pass[i] == '\r') break;
+				
+			}
+
+		}
+		pass[i] = '\0'; //因为下面要进行字符串比较，所以要赋值一个结尾
+		if (strcmp(str1, str2) == 0 && strcmp(pass1,pass) ==0 )
+		{
+			putchar('\n');
+			puts("登录成功！");
+			jude = 1;
+		}
+		else
+		{
+			putchar('\n');
+			puts("用户名或密码错误，请重新登录！");
+			jude = 0;
+		}
+
+
+	} while (!jude);
+
+}
+
+void loading() 
+{
+	printf_s("正在登录");
+	for (int k=0;k<3;k++)
+	{
+		
+		Sleep(500);
+		printf_s("..");
+	}
+	
+}
+
+void manager() 
+{
+	int num = 0 ;
+	int flag = 1;
+	int k = 0;
+	int grade[100] ;
+	int fenbu[100] = { 0 };
+	int i=0;
+	int sum = 0;
+do 
+{
+	printf_s("请输入班级学生人数：");
+	scanf_s("%d", &num);
+	if (num>=1 && num <=20)
+	{
+		flag = 1;
+	}
+	else
+	{
+		puts("范围为1-20");
+		flag = 0;
+	}
+} while (!flag);
+
+puts("请按照学号一次录入考试成绩");
+
+for (; num > 0; num--)
+{
+	do
+	{
+		printf_s("%d号：", k+1);
+		scanf_s("%d", &grade[k]);
+		
+		if (grade[k] < 0 || grade[k] > 100)
+		{
+			puts("输入错误！");
+		}
+		
+	} while (grade[k] < 0 || grade[k] > 100);
+	sum += grade[k];	
+	fenbu[grade[k]/10]++; //比较有技巧的地方，可以避免麻烦的统计，让数组的标号作为有用的东西
+
+	k++; //k++放在最后面的
+}
+printf_s("平均分是：%.2f\n",(double)sum/k);
+puts("   分布图   ");
+printf_s("100:");
+
+for (i = 0; i < fenbu[10]; i++)
+{
+	putchar('*');
+}
+putchar('\n');
+
+for (int i =9;i>0;i--) 
+{
+	printf_s("%d-%d:", i * 10, i * 10 + 9);
+	for (int j=0;j<fenbu[i];j++)
+	{
+		putchar('*');
+	
+	}
+	putchar('\n');
+}
+
+}
+*/
+
