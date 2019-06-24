@@ -298,3 +298,293 @@ for (int i =9;i>0;i--)
 }
 */
 
+/*
+ //任务六，计算两个矩阵的积
+
+void putit();
+void calcu();
+
+	int o = 0;
+	int p = 0;
+	int t = 0;
+	int u = 0;
+	int a[100][100] = { 0 };
+	int b[100][100] = { 0 };
+	int c[100][100] = { 0 };
+
+int main() 
+
+{
+	
+	putit( );
+	calcu( );
+	
+	system("pause");
+	return 0;
+
+}
+
+void putit() 
+{
+	
+	do
+	{
+		puts("请输入第一个矩阵是几行几列的：");
+		printf_s("行:");
+		scanf_s("%d", &o);
+		printf_s("列:");
+		scanf_s("%d", &p);
+		if (0 < 0 || p < 0)
+		{
+			printf_s("输入错误！");
+		}
+
+	} while (0 < 0 || p < 0);
+
+	do
+	{
+		puts("请输入第二个矩阵是几行几列的：");
+		printf_s("行:");
+		scanf_s("%d", &t);
+		printf_s("列:");
+		scanf_s("%d", &u);
+		if (0 < 0 || p < 0)
+		{
+			printf_s("输入错误！");
+		}
+		if (p != t)
+		{
+			puts("矩阵的运算都不懂吗？要行列一样才可计算");
+		}
+
+	} while (0 < 0 || p < 0 || p != t);
+
+	puts("第一个矩阵：");
+	for (int j = 0; j < o; j++)
+	{
+		printf_s("请输入第%d行", j + 1);
+		for (int i = 0; i < p; i++)
+		{
+			scanf_s("%d", &a[j][i]);
+		}
+	}
+	puts("第二个矩阵：");
+	for (int j = 0; j < t; j++)
+	{
+		printf_s("请输入第%d行", j + 1);
+		for (int i = 0; i < u; i++)
+		{
+			scanf_s("%d", &b[j][i]);
+		}
+	}
+
+	puts("第一个矩阵：");
+	for (int j = 0; j < o; j++)
+	{
+		
+		for (int i = 0; i < p; i++)
+		{
+			printf_s("%d ", a[j][i]);
+		}
+		putchar('\n');
+	}
+	puts("您输入的第二个矩阵是：");
+	for (int j = 0; j < t; j++)
+	{
+		
+		for (int i = 0; i < u; i++)
+		{
+			printf_s("%d ", b[j][i]);
+		}
+		putchar('\n');
+	}
+
+
+}
+
+void calcu() 
+{
+
+	for (int i =0;i<o;i++)
+	{
+		for (int j=0;j<u;j++)
+		{
+			for (int k = 0; k < t; k++)
+			{
+				c[i][j] += a[i][k] * b[k][j];	
+			}		
+		}	
+	}
+	
+	for (int j = 0; j < o; j++)
+	{
+
+		for (int i = 0; i < u; i++)
+		{
+			printf_s("%d ", c[j][i]);
+		}
+		putchar('\n');
+	}
+
+
+} */
+
+//任务七，用尽可能计算次数少的方法来找出1000以内的质数
+//方法一，就是按照规则来
+/*int main() 
+{
+	int a[1000] = { 0 };
+	int count = 0;
+	int i = 1;
+  unsigned	long count1 = 0;
+	for (int num=2;num<=1000;num++)
+		  {
+		  for (i =2;i<num;i++)
+		  {
+			  count1++;
+			  if ( num % i == 0 )
+			  {
+				  break;
+			  }
+			
+		  }
+		 if (num ==i)
+		 {
+			 a[count] = num;
+			 count++;
+		 }
+		  }
+	for (int i=0;i<count;i++) 
+	{
+		printf_s("%d\n", a[i]);
+	}
+	printf("计算了：%d次", count1);
+	system("pause");
+	return 0;
+} */
+
+//方法二 ，除了2以外的偶数可以排除的，并且奇数不需要除以偶数
+/*
+int main() 
+{
+	int a[1000] = { 0 };
+	int count = 0;
+	int count1 = 0;
+	int num = 2;
+	int i = 3;
+	printf("%d\n", num++);
+
+	for (;num<=1000;num+=2)
+	{
+		for (i =3;i<num;i+=2)
+		{
+			count1++;
+			if (num%i==0)
+			{
+				break;
+			}
+
+		}
+		if (num ==i)
+		{
+			a[count] = num;
+			count++;
+		}
+	}
+
+	for (int j = 0; j < count; j++)
+	{
+		printf_s("%d\n", a[j]);
+	}
+	printf("计算了：%d次", count1);
+	system("pause");
+	return 0;
+
+}
+*/
+
+//方法三，比如，一个数不能被3整除，就没有必要看能不能被3的倍数整除，所以我们不用
+//一直除以奇数，除以质数就可以了
+/*
+int main()
+{
+	int a[1000] = { 0 };
+	int count = 0;
+	int i = 1;
+	unsigned long count1 = 0;
+
+	a[count++] = 2;
+	a[count++] = 3;
+	for (int num = 5; num <= 1000; num+=2)
+	{
+		for (i = 1; i <count ; i++)
+		{
+			count1++;
+			if (num % a[i] == 0)
+			{
+				break;
+			}
+
+		}
+		if (count == i)
+		{
+			a[count++] = num;	
+		}
+	}
+	for (int i = 0; i < count; i++)
+	{
+		printf_s("%d\n", a[i]);
+	}
+	printf("计算了：%d次", count1);
+	system("pause");
+	return 0;
+}
+*/
+
+//方法四，我尽量解释一下，要是解释不明白可以去参考《明解C语言初级篇》这本书的120页
+/*
+int main()
+{
+	int a[1000] ;
+	int count = 0;
+	int i = 1;
+	unsigned long count1 = 0;
+	
+	a[count++] = 2;
+	a[count++] = 3;
+	for (int num = 5; num <= 1000; num += 2)
+	{
+		int flag = 0;
+		for (i = 1; count1++,a[i]*a[i] <= num; i++)//这也算计算量的
+		{
+			count1++;
+			if (num % a[i] == 0)
+			{
+				flag = 1;
+				break;
+			}
+			
+		}
+		if (flag == 0)
+		{
+			a[count++] = num;
+		}
+	}
+	for (int i = 0; i < count; i++)
+	{
+		printf_s("%d\n", a[i]);
+	}
+	printf("计算了：%d次", count1);
+	system("pause");
+	return 0;
+}
+*/
+
+int main( ) 
+{
+
+
+
+	system("pause");
+	return 0;
+}
