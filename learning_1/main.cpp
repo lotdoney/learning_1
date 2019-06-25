@@ -429,6 +429,8 @@ void calcu()
 
 } */
 
+
+/*
 //任务七，用尽可能计算次数少的方法来找出1000以内的质数
 //方法一，就是按照规则来
 /*int main() 
@@ -580,11 +582,268 @@ int main()
 }
 */
 
+//任务八，使用函数让代码更加的整洁，输入一个数逆向输出
+/*
+int scan_unit( )
+{
+	int num;
+
+	do 
+	{
+		puts("请输入一个数字（0-100000）：");
+		scanf_s("%d", &num);
+
+	} while (num <0 ||num>100000);
+
+	return (num);
+}
+
+int resver(int k) 
+{
+	int temp =0 ;
+	while (k > 0) 
+	{
+		temp = temp * 10 + k % 10; //逆向转化固定式子
+		k = k / 10;
+	}
+	
+	return(temp);
+
+}
+
+
+
 int main( ) 
+{ 
+	int no;
+
+	no = scan_unit();
+	printf_s("%d", resver(no));
+	system("pause");
+	return 0;
+}
+*/
+
+//任务九 数组的传递函数 ,只需要传递数组名,并且不需要所谓的返回值，因为当输入数组时就已经改变了
+
+/*
+int eng[5] = { 0 };
+int math[5] = { 0 };
+
+void scan_unit() 
+{
+	extern int eng[5];
+	extern int  math[5];
+
+	printf_s("请输出英语和数学成绩：\n");
+	for (int i=0;i<5;i++)
+	{
+		do 
+		{
+			printf_s("[%d]", i + 1);
+			printf_s("英语：");
+			scanf_s("%d", &eng[i]);
+			printf_s("   数学：");
+			scanf_s("%d", &math[i]);
+		} while (eng[i]<0||eng[i]>100||math[i]<0||math[i]>100);
+	
+	}
+	
+
+}
+
+
+int maxof( const int vc[], int no)   //int maxof(int *vc ,int no) ,为了防止在函数内更改，所以加个const
 {
 
+	int max = 0;
+	for (int  i = 0; i < no; i++)
+	{
+		if (vc[i]>max)
+		{
+			max = vc[i];
+		}
+
+	}
+
+	return (max);
+}
+
+int main() 
+{
+	scan_unit();
+	
+	printf_s("eng max:%d", maxof(eng, 5));
+	printf_s("eng max:%d", maxof(math, 5));
+
+	
+	system("pause");
+	return 0;
+
+}
+*/
+
+//任务十 哨兵查找法 ，大致意思放到要查找的数字到末尾，一定能找到再比较就可以
+/*
+int searchs(int vc[], int key, int no)
+{
+	int i = 0;
+	vc[no] = key;
+	i = no;
+	no = 0;
+
+	while (vc[no] != key)
+	{
+		no++;
+	}
+
+	return(no == i ? -1 : no); //比较简单的判断用一下
+
+}
+
+int main()
+{
+	int no[5];
+	int flag;
+	for (int i = 0; i < 5; i++)
+	{
+		printf_s("输入%d:", i + 1);
+		scanf_s("%d", &no[i]);
+	}
+
+	flag = searchs(no, 50, 5);
+	if (flag == -1)
+	{
+		printf_s("no\n");
+	}
+	else
+	{
+		printf_s("find it ! %d", no[flag]);
+	}
 
 
 	system("pause");
 	return 0;
 }
+
+*/
+//练习，因为千万的练习比较简单就没怎写6-10
+/*
+int calcu(const int a[2][3],const int b[3][4],int c[2][4]) 
+{
+	for (int i=0;i<2;i++)
+	{
+		for (int k=0;k<4;k++)
+		{
+			for (int d=0;d<3;d++)
+			{
+			 c[i][k]+=a[i][d] * b[d][k];
+			}
+		}
+	}
+}*/
+//6-11 学生成绩处理
+/*
+int grade1[5][3];
+
+void scan_unit();
+void maxof(int vc[5][3],int va[3]);
+
+void avarage(int ac[5][3], double av[5]);
+
+
+int main() 
+{
+	extern int grade1[5][3];
+	int maxfen[3] = { 0 };
+	double ava[5] = { 0 };
+	scan_unit();
+	maxof(grade1,maxfen);
+	avarage(grade1, ava);
+	for (int k = 0; k < 3; k++)
+	{
+		printf_s("%d\n", maxfen[k]);
+	}
+
+	for (int i=0;i<5;i++)
+	{
+		printf_s("第%d个同学：", i + 1);
+		printf_s("%.2f", ava[i]);
+		putchar('\n');
+	}
+
+
+
+	system("pause");
+	return 0;
+
+}
+
+void scan_unit()
+{
+	extern int grade1[5][3];
+
+	for (int i = 0; i < 5; i++)
+	{
+		printf_s("请输入第%d个学生的成绩：\n", i + 1);
+		for (int j = 0; j < 3; j++)
+		{
+			do
+			{
+				if (j == 0)
+				{
+					printf_s("语文：");
+				}
+				else if (j == 1)
+				{
+					printf_s("数学：");
+				}
+				else if (j == 2)
+				{
+					printf_s("英语：");
+				}
+				scanf_s("%d", &grade1[i][j]);
+				if (grade1[i][j] < 0 || grade1[i][j]>100)
+				{
+					printf_s("请重新输入第%d个学生的成绩：\n", i + 1);
+				}
+			} while (grade1[i][j] < 0 || grade1[i][j]>100);
+
+		}
+	}
+
+
+}
+void  maxof(int vc[5][3],int va[3])
+{
+
+	
+	for (int i=0;i<3;i++)
+	{
+		for (int j=0;j<5;j++)
+		{
+			if (vc[j][i]>va[i])
+			{
+				va[i] = vc[j][i];
+			}
+		
+		}
+	}
+
+	puts("语数外最高分：");
+
+}
+void avarage(int ac[5][3], double av[5])
+{
+
+	for (int i = 0; i < 5; i++)
+	{
+		for (int j = 0; j < 3; j++)
+		{
+			av[i] += ac[i][j];
+		}
+		av[i] = av[i] / 3;
+	}
+
+}
+*/
